@@ -7,7 +7,9 @@
 #
 #**********************************************************************************
 #To use this file we need a time series: LEIBmarzo.ts, a data set with all the 
-#variables indicated below and the historical observations saved in LEIB_6h.
+#variables indicated below and the historical observations saved in LEIB_6h, with 
+#6 observation to each day.This file is created at DataWrangling.R
+#In addition, 8 daily observations are needed for the Mallorca and Menorca stations.
 
 
 
@@ -86,7 +88,8 @@ His_IB_m <- His_IB_m %>%
          v_nudos=as.numeric(v_nudos)) %>% 
          arrange(fecha, anho, mes, dia, grupohorario19)
 
-His_IB_m  %>% group_by(dia, mes, anho, grupohorario19, Date) %>% summarise(v_nudos=median(v_nudos,na.rm=TRUE), direccion =median(direccion,na.rm=TRUE)) -> His_IB_m 
+His_IB_m  %>% group_by(dia, mes, anho, grupohorario19, Date) %>% 
+  summarise(v_nudos=median(v_nudos,na.rm=TRUE), direccion =median(direccion,na.rm=TRUE)) -> His_IB_m 
 
 His_IB_m <- His_IB_m %>% mutate(EsteOeste=(v_nudos)*sin((direccion)*pi/180)) %>% 
   mutate(NorteSur = (v_nudos)*cos((direccion)*pi/180)) %>%
