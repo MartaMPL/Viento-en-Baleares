@@ -91,8 +91,8 @@ His_IB_m <- His_IB_m %>%
 His_IB_m  %>% group_by(dia, mes, anho, grupohorario19, Date) %>% 
   summarise(v_nudos=median(v_nudos,na.rm=TRUE), direccion =median(direccion,na.rm=TRUE)) -> His_IB_m 
 
-His_IB_m <- His_IB_m %>% mutate(EsteOeste=(v_nudos)*sin((direccion)*pi/180)) %>% 
-  mutate(NorteSur = (v_nudos)*cos((direccion)*pi/180)) %>%
+His_IB_m <- His_IB_m %>% mutate(EsteOeste=(-v_nudos)*sin((direccion)*pi/180)) %>% 
+  mutate(NorteSur = (-v_nudos)*cos((direccion)*pi/180)) %>%
   mutate(EsteOeste=round(EsteOeste, digits = 1)) %>% 
   mutate(NorteSur=round(NorteSur, digits = 1))
 His_IB_m %>% arrange(anho, dia, grupohorario19, mes) -> His_IB_m
